@@ -8,9 +8,12 @@ const Contact = () => {
   const [loading, setloading] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<any>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => {
+  setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+};
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
