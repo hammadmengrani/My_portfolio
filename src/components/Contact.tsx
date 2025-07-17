@@ -1,7 +1,35 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Mail, Github, Linkedin } from "lucide-react";
+import { submitContactForm } from "@/api/api";
 
 const Contact = () => {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [loading, setloading] = useState(false);
+  const [responseMsg, setResponseMsg] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<any>) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setloading(true);
+    setResponseMsg("");
+
+    try {
+      const res = await submitContactForm(form);
+      console.log(res);
+      setResponseMsg(res.message || "message Sent successfully");
+      setForm({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting the form", error);
+      setResponseMsg("something when wrong");
+    } finally {
+      setloading(false);
+    }
+  };
+
   return (
     <section className="w-full px-5 md:px-20 py-16 bg-black text-white">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
@@ -45,14 +73,20 @@ const Contact = () => {
         </div>
 
         {/* Right Side: Form */}
-        <form className="bg-gray-900/80 backdrop-blur-md rounded-xl p-6 space-y-5 border border-white/10 shadow-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-gray-900/80 backdrop-blur-md rounded-xl p-6 space-y-5 border border-white/10 shadow-lg"
+        >
           <div className="flex flex-col gap-2">
             <label htmlFor="name" className="text-sm text-gray-300">
               Name
             </label>
             <input
+            name = 'name'
               type="text"
               id="name"
+              value={form.name}
+              onChange={handleChange}
               placeholder="Your name"
               className="bg-black/70 border border-cyan-400/30 px-4 py-2 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition duration-300"
             />
@@ -63,8 +97,11 @@ const Contact = () => {
               Email
             </label>
             <input
+            name="email"
               type="email"
               id="email"
+              value={form.email}
+              onChange={handleChange}
               placeholder="Your email"
               className="bg-black/70 border border-blue-400/30 px-4 py-2 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition duration-300"
             />
@@ -75,8 +112,11 @@ const Contact = () => {
               Message
             </label>
             <textarea
+            name="message"
               id="message"
+              value={form.message}
               placeholder="Write your message..."
+              onChange={handleChange}
               rows={5}
               className="bg-black/70 border border-purple-400/30 px-4 py-2 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition duration-300"
             />
@@ -86,8 +126,9 @@ const Contact = () => {
             type="submit"
             className="w-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 text-white font-semibold py-2 rounded-md hover:opacity-90 transition-opacity duration-300"
           >
-            Send Message
+            {loading ? "Sending..." : "Submit"}
           </button>
+          {responseMsg && <p className="mt-2 text-green-600">{responseMsg}</p>}
         </form>
       </div>
     </section>

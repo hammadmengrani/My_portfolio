@@ -187,6 +187,15 @@ const page = () => {
       >
         <Contact/>
       </SectionContainer>
+            <SectionContainer
+        className="container mx-auto py-12"
+        title="Let's Build Something Amazing"
+        desc="Ready to collaborate on your next project? Let's discuss how we can bring your ideas to life with modern web technologies and AI integration."
+        bgColor={true}
+        childClassName="flex flex-row items-center justify-center mx-auto overflow-hidden"
+      >
+        <Contact/>
+      </SectionContainer>
     </div>
   );
 };
