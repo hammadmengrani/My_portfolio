@@ -272,7 +272,7 @@ const ThreeJSBanner: React.FC = () => {
           </div>
 
           {/* Skills Tags */}
-          <div
+          {/* <div
             className={`flex flex-wrap justify-center gap-3 mb-8 transition-all duration-1000 delay-700 ${
               isLoaded
                 ? "opacity-100 translate-y-0"
@@ -306,7 +306,7 @@ const ThreeJSBanner: React.FC = () => {
                 {skill}
               </span>
             ))}
-          </div>
+          </div> */}
 
           {/* Social Links */}
           <div
