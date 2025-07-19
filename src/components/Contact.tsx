@@ -90,6 +90,7 @@ const handleChange = (
               id="name"
               value={form.name}
               onChange={handleChange}
+                required
               placeholder="Your name"
               className="bg-black/70 border border-cyan-400/30 px-4 py-2 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition duration-300"
             />
@@ -106,6 +107,8 @@ const handleChange = (
               value={form.email}
               onChange={handleChange}
               placeholder="Your email"
+                required
+
               className="bg-black/70 border border-blue-400/30 px-4 py-2 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition duration-300"
             />
           </div>
@@ -121,6 +124,8 @@ const handleChange = (
               placeholder="Write your message..."
               onChange={handleChange}
               rows={5}
+                required
+
               className="bg-black/70 border border-purple-400/30 px-4 py-2 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition duration-300"
             />
           </div>
